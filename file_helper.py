@@ -1,27 +1,18 @@
-from PyStudentManager.student import Student, get_students, add_student
+from PyStudentManager.student import Student, get_student_names, add_student_to_list
+import os
+import json
 
 
 class FileHelper:
-    student_file = "students.txt"
+    student_file = os.path.dirname(os.path.abspath(__file__)) + "\students.json"
 
     @staticmethod
-    def save_students():
-        try:
-            f = open(FileHelper.student_file, "w")
-            for student in get_students():
-                f.write(student.name + "\n")
-        except Exception as e:
-            print("Could not read from file {}".format(e))
-        finally:
-            f.close()
-
-    @staticmethod
-    def save_student(student):
+    def save_student(student_dictionary):
         try:
             f = open(FileHelper.student_file, "a")
-            f.write(student.name + "\n")
+            f.write(json.dumps(student_dictionary)+"\n")
         except Exception as e:
-            print("Could not read from file {}".format(e))
+            print("Could not write to file {}".format(e))
         finally:
             f.close()
 
@@ -29,10 +20,10 @@ class FileHelper:
     def read_students():
         try:
             f = open(FileHelper.student_file, "r")
-            counter = 0
-            for studentName in f.readlines():
-                add_student(Student(studentName.replace("\n", ""), counter))
-                counter += 1
+            for student in f.readlines():
+                json_data = json.loads(student)
+                add_student_to_list(Student(json_data["forename"], json_data["lastname"], json_data["id"]))
+
             f.close()
         except Exception as e:
             print("Could not read from file {}".format(e))
