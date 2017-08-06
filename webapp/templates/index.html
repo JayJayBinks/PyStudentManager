@@ -67,7 +67,7 @@
     <div class="jumbotron">
         <h1>PyStudentManager</h1>
         <p>This app will allow you to view all the enrolled students and detailed information about them (such as
-            student ID and their first name - more to come). You can also add more students to your list.</p>
+             their name - more to come). You can also add more students to your list.</p>
     </div>
 
     <div class="page-header">
@@ -78,7 +78,6 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Student ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Actions</th>
@@ -87,9 +86,8 @@
                 <tbody>
                 {% for student in students %}
                 <tr>
-                    <td>{{ student.id }}</td>
-                    <td>{{ student.name }}</td>
-                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.forename }}</td>
+                    <td>{{ student.lastname }}</td>
                     <td>
                         <button class="btn btn-primary btn-sm">Edit</button>
                         <button class="btn btn-danger btn-sm">Delete</button>
@@ -110,16 +108,12 @@
         <div class="col-md-8">
             <form method="POST">
                 <div class="form-group">
-                    <label for="student-id">Student ID</label>
-                    <input type="number" class="form-control" id="student-id" placeholder="Student ID" name="student-id">
+                    <label for="forename">First Name</label>
+                    <input type="text" class="form-control" id="forename" placeholder="First Name" name="name">
                 </div>
                 <div class="form-group">
-                    <label for="first-name">First Name</label>
-                    <input type="text" class="form-control" id="first-name" placeholder="First Name" name="name">
-                </div>
-                <div class="form-group">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" class="form-control" id="last-name" placeholder="Last Name" name="last-name">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="last-name">
                 </div>
 
                 <button type="submit" class="btn btn-default">Submit</button>

@@ -12,7 +12,7 @@ class FileHelper:
             f = open(FileHelper.student_file, "a")
             f.write(json.dumps(student_dictionary)+"\n")
         except Exception as e:
-            print("Could not write to file {}".format(e))
+            print("Could not write to file! Exception: {}".format(e))
         finally:
             f.close()
 
@@ -23,7 +23,6 @@ class FileHelper:
             for student in f.readlines():
                 json_data = json.loads(student)
                 add_student_to_list(Student(json_data["forename"], json_data["lastname"], json_data["id"]))
-
             f.close()
         except Exception as e:
-            print("Could not read from file {}".format(e))
+            print("Could not read from file! Exception: {}".format(e))
